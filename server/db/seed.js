@@ -1,22 +1,3 @@
-/*
- * seed.js
- * --------
- * Creates the database schema and pre-populates it with the initial data
- * required by the assignment:
- *   - 4 lines, 14 stations, 7 interchange stations
- *   - 10 events (effects from -4 to +4)
- *   - 3 registered users (passwords stored salted + hashed with scrypt)
- *   - 2 users with already-played games (so the ranking is not empty)
- *
- * Run once with:  node db/seed.js
- *
- * The key structural idea is the `line_stations` table: it stores, for each
- * line, the ORDERED sequence of its stations (via the `position` column).
- * Two stations are connected by a segment only if they are adjacent in some
- * line's ordering. An interchange station is simply a station that appears
- * in `line_stations` under more than one line. All route validation and
- * reachability logic on the server is derived from this single table.
- */
 
 import sqlite3 from 'sqlite3';
 import crypto from 'crypto';
