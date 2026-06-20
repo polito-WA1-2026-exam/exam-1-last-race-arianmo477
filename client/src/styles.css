@@ -1,0 +1,35 @@
+/*
+ * styles.css
+ * ----------
+ * Minimal theme override: retint Bootstrap's primary and success colors to a
+ * fresh teal. Everything else uses Bootstrap's own classes and utilities.
+ */
+
+:root {
+  --bs-primary: #14857a;
+  --bs-primary-rgb: 20, 133, 122;
+  --bs-success: #19a394;
+  --bs-success-rgb: 25, 163, 148;
+  --bs-link-color: #0f766e;
+  --bs-link-hover-color: #0b5d57;
+}
+
+.btn-primary {
+  --bs-btn-bg: #14857a;
+  --bs-btn-border-color: #14857a;
+  --bs-btn-hover-bg: #0f766e;
+  --bs-btn-hover-border-color: #0f766e;
+  --bs-btn-active-bg: #0f766e;
+  --bs-btn-active-border-color: #0f766e;
+  --bs-btn-disabled-bg: #14857a;
+  --bs-btn-disabled-border-color: #14857a;
+}
+
+.btn-success {
+  --bs-btn-bg: #19a394;
+  --bs-btn-border-color: #19a394;
+  --bs-btn-hover-bg: #14857a;
+  --bs-btn-hover-border-color: #14857a;
+}
+
+.text-primary { color: #14857a !important; }
