@@ -21,9 +21,7 @@ const all = (sql, params = []) =>
     db.all(sql, params, (err, rows) => (err ? reject(err) : resolve(rows)));
   });
 
-// Create a new game. started_at is stamped on the server right now; the
-// 90-second planning limit is checked later against this value, so the
-// timer cannot be tampered with from the client.
+
 export async function createGame(userId, startId, destId) {
   const startedAt = new Date().toISOString();
   const res = await run(
@@ -34,15 +32,12 @@ export async function createGame(userId, startId, destId) {
   return getGameById(res.lastID);
 }
 
-// Load a single game row (includes user_id, start_id, dest_id, status,
-// score, started_at). Returns undefined if not found.
+
 export function getGameById(gameId) {
   return get('SELECT * FROM games WHERE id = ?', [gameId]);
 }
 
-// Persist the executed route. `resolvedSteps` is an ordered array of
-// { fromId, toId, eventId }. Written one row per step so the Result phase
-// can replay the journey and the data is auditable.
+
 export async function saveSegments(gameId, resolvedSteps) {
   for (let i = 0; i < resolvedSteps.length; i++) {
     const { fromId, toId, eventId } = resolvedSteps[i];
@@ -54,9 +49,7 @@ export async function saveSegments(gameId, resolvedSteps) {
   }
 }
 
-// Mark a game finished and store its final score. The caller is responsible
-// for clamping negative scores to 0 (scoring policy lives in services), but
-// we guard here too so the DB never holds a negative score.
+
 export function finishGame(gameId, score) {
   const safeScore = Math.max(0, score);
   return run(
@@ -65,7 +58,7 @@ export function finishGame(gameId, score) {
   );
 }
 
-// Ordered steps of a game, joined to event + station names for display.
+
 export function getGameSegments(gameId) {
   return all(
     `SELECT gs.step,
@@ -83,8 +76,7 @@ export function getGameSegments(gameId) {
   );
 }
 
-// General ranking: each user's BEST score across their finished games.
-// Only users who have completed at least one game appear. Ordered high->low.
+
 export function getRanking() {
   return all(
     `SELECT u.username, MAX(g.score) AS bestScore
