@@ -1,19 +1,11 @@
-/*
- * LoginForm.jsx
- * -------------
- * Controlled login form with client-side validation. On success the user is
- * sent to the game (/play). Includes a small set of "quick fill" buttons that
- * populate the seeded test accounts — a convenience for testing and demos.
- */
+
 
 import { useState } from 'react';
 import { Form, Button, Alert, Card, Stack } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../useAuth.js';
 
-// The seeded demo accounts (see server/db/seed.js). Used only to prefill the
-// form for quick testing — credentials are still sent to and checked by the
-// server as a normal login.
+
 const TEST_USERS = [
   { username: 'mario', password: 'password123' },
   { username: 'lucia', password: 'metro2026' },
