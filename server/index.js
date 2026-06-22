@@ -12,12 +12,12 @@ import rankingRoutes from './routes/ranking-routes.js';
 
 const app = express();
 const PORT = 3001;
-const CLIENT_ORIGIN = 'http://localhost:5173'; // Vite dev server
+const CLIENT_ORIGIN = 'http://localhost:5173';
 
-// Parse JSON request bodies.
+
 app.use(express.json());
 
-// CORS: allow the React dev server origin and send/receive cookies.
+
 app.use(
   cors({
     origin: CLIENT_ORIGIN,
@@ -35,11 +35,11 @@ app.use(
   })
 );
 
-// Passport must come after session so it can attach to the session.
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Mount API routes.
+
 app.use(authRoutes);
 app.use(networkRoutes);
 app.use(gameRoutes);
