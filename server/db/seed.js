@@ -24,9 +24,6 @@ const exec = (sql) =>
     db.exec(sql, (err) => (err ? reject(err) : resolve()));
   });
 
-// Hash a plaintext password with a fresh random salt using scrypt.
-// Returns { hash, salt } as hex strings. No external library needed,
-// which satisfies the "encrypted and salted" requirement.
 function hashPassword(plain) {
   const salt = crypto.randomBytes(16).toString('hex');
   const hash = crypto.scryptSync(plain, salt, 32).toString('hex');
@@ -62,7 +59,7 @@ const STATION_COORDS = {
   'Vigna Alta': { x: 680, y: 460 },
   'Lido Sud': { x: 800, y: 500 },
 };
-// At least 8 events; effects span the full -4..+4 range.
+
 const EVENTS = [
   { description: 'Quiet journey, nothing happens', effect: 0 },
   { description: 'Kind passenger gives you a coin', effect: 1 },
@@ -76,7 +73,6 @@ const EVENTS = [
   { description: 'Pickpocket on a crowded car', effect: -4 },
 ];
 
-// Three registered users; two of them will get sample games below.
 const USERS = [
   { username: 'mario', password: 'password123' },
   { username: 'lucia', password: 'metro2026' },
@@ -198,9 +194,7 @@ async function seed() {
     userId[u.username] = res.lastID;
   }
 
-  // --- Sample finished games for two users (non-empty ranking) ----------
-  // mario: Centrale -> Porta Velaria -> Crocevia del Falco -> Piazza delle Lanterne (Red line, 3 stops)
-  // lucia: Centrale -> Fontana Oscura -> Borgo Sereno -> Viale dei Mosaici (Blue line, 3 stops)
+
   const sampleGames = [
     {
       user: 'mario',
