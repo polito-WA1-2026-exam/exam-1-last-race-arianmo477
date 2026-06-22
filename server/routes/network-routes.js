@@ -1,18 +1,4 @@
-/*
- * network-routes.js
- * -----------------
- * Network data at two detail levels, both protected (only logged-in users may
- * see the map — anonymous users get only instructions per the spec):
- *
- *   GET /api/network           -> full network (stations + lines + ordering)
- *                                 for the SETUP phase.
- *   GET /api/network/segments  -> flat list of connected station pairs WITHOUT
- *                                 line info, for the PLANNING phase.
- *
- * Plus a PUBLIC endpoint (no auth) that anonymous visitors may also read, as
- * the spec lets visitors see the list of possible events:
- *   GET /api/events            -> all events (description + effect).
- */
+
 
 import express from 'express';
 import { getFullNetwork, getSegments } from '../dao/network-dao.js';
@@ -44,8 +30,7 @@ router.get('/api/network/segments', isLoggedIn, async (req, res) => {
   }
 });
 
-// Public: the list of possible events. Not guarded — anonymous visitors may
-// read it (spec: visitors can view the game instructions and event list).
+
 router.get('/api/events', async (req, res) => {
   try {
     const events = await getEvents();
